@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= data.name %></title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>學生id</td>
+        <td><%= data.id %></td>
+      </tr>
+      <tr>
+        <td>全名</td>
+        <td><%= data.name %></td>
+      </tr>
+      <tr>
+        <td>年紀</td>
+        <td><%= data.age %></td>
+      </tr>
+      <tr>
+        <td>獎學金(Merit)</td>
+        <td><%= data.scholarship.merit %></td>
+      </tr>
+      <tr>
+        <td>獎學金(other)</td>
+        <td><%= data.scholarship.other %></td>
+      </tr>
+      <tr>
+        <td>獎學金加總(Total scholarship)</td>
+        <td><%= data.scholarship.merit + data.scholarship.other %></td>
+      </tr>
+    </table>
+
+    <a href="/students">回到學生頁面 Go back to students page.</a>
+  </body>
+</html>
