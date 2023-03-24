@@ -27,8 +27,7 @@ mongoose
     console.log(e);
   });
 
-// turn Student Project into a restful api
-
+// Transform the Student Project into a RESTful API.
 app.get('/students', async (req, res) => {
   try {
     let data = await Student.find();
@@ -45,7 +44,7 @@ app.get('/students/insert', (req, res) => {
 // 學生個人頁面
 app.get('/students/:id', async (req, res) => {
   let { id } = req.params;
-  // MongoDB找到此id學生
+  // Find student data that matches this ID in MongoDB.
   try {
     let data = await Student.findOne({ id });
     if (data !== null) {
