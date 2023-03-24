@@ -48,11 +48,11 @@ app.get('/students/:id', async (req, res) => {
   // MongoDB找到此id學生
   try {
     let data = await Student.findOne({ id });
-
     if (data !== null) {
-      res.render('studentPage.ejs', { data });
+      res.send(data);
     } else {
-      res.send('Cannot find this student. Please enter a valid id.');
+      res.status(404);
+      res.send({ message: 'Cannot find data.' });
     }
   } catch (err) {
     res.send('Error!!!');
