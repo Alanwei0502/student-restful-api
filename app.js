@@ -27,16 +27,14 @@ mongoose
     console.log(e);
   });
 
-app.get('/', (req, res) => {
-  res.send('就是首頁');
-});
+// turn Student Project into a restful api
 
 app.get('/students', async (req, res) => {
   try {
     let data = await Student.find();
-    res.render('students.ejs', { data });
+    res.send(data);
   } catch {
-    res.send('Error with finding data.');
+    res.send({ message: 'Error with finding data.' });
   }
 });
 
