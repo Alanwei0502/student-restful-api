@@ -1,5 +1,5 @@
 {
-  "name": "student-project",
+  "name": "student-project-restfulapi",
   "version": "1.0.0",
   "description": "This is for mongoose and express together! :)",
   "main": "app.js",
