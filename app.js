@@ -86,22 +86,8 @@ app.post('/students/', (req, res) => {
     });
 });
 
-app.get('/students/edit/:id', async (req, res) => {
-  let { id } = req.params;
-  try {
-    let data = await Student.findOne({ id });
-    if (data !== null) {
-      res.render('edit.ejs', { data });
-    } else {
-      res.send('Cannot find student.');
-    }
-  } catch {
-    res.send('Error!');
-  }
-});
-
 // PUT request
-app.put('/students/edit/:id', async (req, res) => {
+app.put('/students/:id', async (req, res) => {
   let { id, name, age, merit, other } = req.body;
   try {
     await Student.findOneAndUpdate(
@@ -109,9 +95,10 @@ app.put('/students/edit/:id', async (req, res) => {
       { id, name, age, scholarship: { merit, other } },
       { new: true, runValidators: true }
     );
-    res.redirect(`/students/${id}`);
-  } catch {
-    res.render('reject.ejs');
+    res.send('Successfully updated the data.');
+  } catch (err) {
+    res.status(404);
+    res.send(err);
   }
 });
 
