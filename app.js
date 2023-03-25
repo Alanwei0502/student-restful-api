@@ -27,7 +27,9 @@ mongoose
     console.log(e);
   });
 
-// Transform the Student Project into a RESTful API.
+/* Transform the Student Project into a RESTful API. */
+
+/* Get all Data */
 app.get('/students', async (req, res) => {
   try {
     let data = await Student.find();
@@ -41,7 +43,7 @@ app.get('/students/insert', (req, res) => {
   res.render('studentInsert.ejs');
 });
 
-// 學生個人頁面
+/* Get Data by ID */
 app.get('/students/:id', async (req, res) => {
   let { id } = req.params;
   // Find student data that matches this ID in MongoDB.
@@ -59,11 +61,12 @@ app.get('/students/:id', async (req, res) => {
   }
 });
 
-app.post('/students/insert', (req, res) => {
-  // 把我們要的資訊從req.body裡面提領出來
+/* Create a new student via POST request. */
+app.post('/students/', (req, res) => {
+  // Extract the data we need from req.body.
   let { id, name, age, merit, other } = req.body;
 
-  // 設定newStudent的屬性
+  // Set the properties of a new Student
   let newStudent = new Student({
     id,
     name,
@@ -71,17 +74,15 @@ app.post('/students/insert', (req, res) => {
     scholarship: { merit, other },
   });
 
-  // 將新學生物件存入DB
+  // Save the new student data into MongoDB.
   newStudent
     .save()
     .then(() => {
-      console.log('Student accepted. 已儲存此學生');
-      res.render('accept.ejs');
+      res.send({ message: 'Successfully post a new student' });
     })
     .catch((err) => {
-      console.log('Student not accepted. 此學生未被儲存');
-      console.log(err);
-      res.render('reject.ejs');
+      res.status(404);
+      res.send(err);
     });
 });
 
