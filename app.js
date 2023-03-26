@@ -136,12 +136,26 @@ app.patch('/students/:id', async (req, res) => {
 });
 
 // use Postman to send DELETE request
+/* Delete Data by ID */
 app.delete('/students/delete/:id', (req, res) => {
   let { id } = req.params;
   Student.deleteOne({ id })
     .then((message) => {
       console.log(message);
       res.send('Deleted successfully.');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send('Delete failed.');
+    });
+});
+
+/* Delete All Data */
+app.delete('/students/delete', (req, res) => {
+  Student.deleteMany({})
+    .then((message) => {
+      console.log(message);
+      res.send('Deleted all data successfully.');
     })
     .catch((err) => {
       console.log(err);
