@@ -102,6 +102,39 @@ app.put('/students/:id', async (req, res) => {
   }
 });
 
+/* Patch Request to API */
+class newData {
+  constructor() {}
+  // method
+  setProperty(key, value) {
+    if (key !== 'merit' && key !== 'other') {
+      this[key] = value;
+    } else {
+      this[`scholarship.${key}`] = value;
+    }
+  }
+}
+
+app.patch('/students/:id', async (req, res) => {
+  let { id } = req.params;
+  let newObject = new newData();
+  for (let property in req.body) {
+    newObject.setProperty(property, req.body[property]);
+  }
+  console.log(newObject);
+  try {
+    let d = await Student.findOneAndUpdate({ id }, newObject, {
+      new: true,
+      runValidators: true,
+    });
+    console.log(d); // findOneAndUpdate() returns a query
+    res.send('Successfully updated the data.');
+  } catch (err) {
+    res.status(404);
+    res.send(err);
+  }
+});
+
 // use Postman to send DELETE request
 app.delete('/students/delete/:id', (req, res) => {
   let { id } = req.params;
