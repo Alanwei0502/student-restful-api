@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Student = require('./models/student');
 const methodOverride = require('method-override');
+const createNewObject = require('./models/utils');
 
 /* middleware */
 app.use(express.static('public'));
@@ -117,10 +118,8 @@ class newData {
 
 app.patch('/students/:id', async (req, res) => {
   let { id } = req.params;
-  let newObject = new newData();
-  for (let property in req.body) {
-    newObject.setProperty(property, req.body[property]);
-  }
+  let newObject = createNewObject(req.body);
+
   console.log(newObject);
   try {
     let d = await Student.findOneAndUpdate({ id }, newObject, {
