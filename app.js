@@ -104,18 +104,6 @@ app.put('/students/:id', async (req, res) => {
 });
 
 /* Patch Request to API */
-class newData {
-  constructor() {}
-  // method
-  setProperty(key, value) {
-    if (key !== 'merit' && key !== 'other') {
-      this[key] = value;
-    } else {
-      this[`scholarship.${key}`] = value;
-    }
-  }
-}
-
 app.patch('/students/:id', async (req, res) => {
   let { id } = req.params;
   let newObject = createNewObject(req.body);
