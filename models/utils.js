@@ -1,3 +1,9 @@
+/**
+ * [jsDoc備註寫法] 
+ * 取代 NewData Class 的函數
+ * @param {object} body - request body 
+ * @returns {object} new obejct
+ */
 function createNewObject(body){
   let newObject = {};
 
